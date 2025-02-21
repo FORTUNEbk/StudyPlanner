@@ -7,9 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.studyplanner.ui.theme.StudyPlannerTheme
-import com.example.studyplanner.ui.SettingsScreen  // Import the settings screen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,9 +18,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             StudyPlannerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SettingsScreen(modifier = Modifier.padding(innerPadding))  // Load SettingsScreen
+                    SettingsScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
+}
+
+// Define the SettingsScreen composable function
+@Composable
+fun SettingsScreen(modifier: Modifier = Modifier) {
+    // Placeholder: Add UI elements for the settings screen here
 }
