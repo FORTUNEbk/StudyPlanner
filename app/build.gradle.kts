@@ -55,6 +55,13 @@ dependencies {
     // ✅ Corrected Compose Material Icons Extended dependency
     implementation("androidx.compose.material:material-icons-extended:1.5.0")
 
+    // ✅ Added missing AndroidX DataStore dependency
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // ✅ Added missing Kotlin Coroutines dependencies (needed for DataStore)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
