@@ -21,33 +21,48 @@ fun PlansScreen(onAddPlanClick: () -> Unit) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        // Header Section
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("Plans", fontSize = 24.sp)
-            Text("+", fontSize = 28.sp, modifier = Modifier.clickable { onAddPlanClick() })
+            Text(
+                text = "Plans",
+                fontSize = 24.sp
+            )
+            Text(
+                text = "+",
+                fontSize = 28.sp,
+                modifier = Modifier.clickable { onAddPlanClick() } // Clickable to navigate
+            )
         }
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Text(
-            "You don’t have registered study plans",
-            fontSize = 14.sp,
-            color = Color.Gray,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
+        // Empty State Message
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "You don’t have registered study plans",
+                fontSize = 14.sp,
+                color = Color.Gray,
+                textAlign = TextAlign.Center
+            )
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Text(
-            "Click on + to add",
-            fontSize = 14.sp,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
+            Text(
+                text = "Click on + to add",
+                fontSize = 14.sp,
+                textAlign = TextAlign.Center
+            )
+        }
 
         Spacer(modifier = Modifier.weight(1f))
 
+        // Bottom Icons
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround
