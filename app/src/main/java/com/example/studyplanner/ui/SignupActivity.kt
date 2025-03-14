@@ -2,6 +2,7 @@ package com.example.studyplanner
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -29,14 +30,11 @@ class SignupActivity : AppCompatActivity() {
             val password = passwordField.text.toString().trim()
             val confirmPassword = confirmPasswordField.text.toString().trim()
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
-            } else if (password != confirmPassword) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
-            } else {
-                // TODO: Implement actual registration logic
+            if (validateInput(name, email, password, confirmPassword, nameField, emailField, passwordField, confirmPasswordField)) {
+                // TODO: Implement actual registration logic (e.g., Firebase, SQLite)
                 Toast.makeText(this, "Account Created Successfully!", Toast.LENGTH_SHORT).show()
-                // Example: Navigate to Login Activity after successful sign-up
+
+                // Navigate to Login Activity after successful sign-up
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
@@ -44,9 +42,40 @@ class SignupActivity : AppCompatActivity() {
 
         // Handle Back to Login Click
         backToLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    /**
+     * Validates the user input fields and shows relevant error messages.
+     */
+    private fun validateInput(
+        name: String,
+        email: String,
+        password: String,
+        confirmPassword: String,
+        nameField: EditText,
+        emailField: EditText,
+        passwordField: EditText,
+        confirmPasswordField: EditText
+    ): Boolean {
+        if (name.isEmpty()) {
+            nameField.error = "Name is required"
+            return false
+        }
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailField.error = "Enter a valid email"
+            return false
+        }
+        if (password.length < 8 || !password.matches(Regex(".*[A-Za-z].*")) || !password.matches(Regex(".*[0-9].*"))) {
+            passwordField.error = "Password must be at least 8 characters, include letters and numbers"
+            return false
+        }
+        if (password != confirmPassword) {
+            confirmPasswordField.error = "Passwords do not match"
+            return false
+        }
+        return true
     }
 }

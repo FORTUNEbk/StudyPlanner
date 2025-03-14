@@ -18,7 +18,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun SettingsScreen(navController: NavHostController, modifier: Modifier = Modifier) {
@@ -30,18 +32,22 @@ fun SettingsScreen(navController: NavHostController, modifier: Modifier = Modifi
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
+        // Title
         Text(
             text = "Settings",
             fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
             color = Color.Black,
             modifier = Modifier.padding(bottom = 24.dp)
         )
 
+        // Settings Options
         SettingsButton(text = "Edit Profile", icon = Icons.Default.AccountCircle) {}
         SettingsButton(text = "Enable Notifications", icon = Icons.Default.Notifications) {}
         SettingsButton(text = "Choose Theme", icon = Icons.Default.Brightness6) {}
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.weight(1f)) // Pushes logout button to bottom
+
         LogoutButton(onClick = { /* Handle logout navigation */ })
     }
 }
@@ -52,14 +58,14 @@ fun SettingsButton(text: String, icon: androidx.compose.ui.graphics.vector.Image
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .background(Color(0xFFD6D6D6), shape = RoundedCornerShape(8.dp))
+            .background(Color.White, shape = RoundedCornerShape(8.dp))
             .clickable(onClick = onClick)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(imageVector = icon, contentDescription = text, tint = Color.Black, modifier = Modifier.size(24.dp))
         Spacer(modifier = Modifier.width(16.dp))
-        Text(text = text, fontSize = 16.sp, color = Color.Black)
+        Text(text = text, fontSize = 16.sp, color = Color.Black, fontWeight = FontWeight.Medium)
     }
 }
 
@@ -68,17 +74,18 @@ fun LogoutButton(onClick: () -> Unit) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp)
     ) {
         Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "Logout", tint = Color.White)
         Spacer(modifier = Modifier.width(8.dp))
-        Text("Logout", color = Color.White)
+        Text("Logout", color = Color.White, fontWeight = FontWeight.Bold)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun SettingsScreenPreview() {
-    // Preview does not require navController, passing a placeholder
-    SettingsScreen(navController = object : NavHostController(LocalContext.current) {})
+    SettingsScreen(navController = rememberNavController()) // Uses a placeholder navController
 }

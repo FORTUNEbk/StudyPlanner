@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun PlansScreen(onAddPlanClick: () -> Unit) {
@@ -24,7 +25,8 @@ fun PlansScreen(onAddPlanClick: () -> Unit) {
         // Header Section
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "Plans",
@@ -33,7 +35,9 @@ fun PlansScreen(onAddPlanClick: () -> Unit) {
             Text(
                 text = "+",
                 fontSize = 28.sp,
-                modifier = Modifier.clickable { onAddPlanClick() } // Clickable to navigate
+                modifier = Modifier
+                    .clickable { onAddPlanClick() }
+                    .padding(8.dp) // Added padding for better tap target
             )
         }
 
@@ -64,11 +68,27 @@ fun PlansScreen(onAddPlanClick: () -> Unit) {
 
         // Bottom Icons
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            Icon(Icons.Filled.DateRange, contentDescription = "Calendar")
-            Icon(Icons.Filled.Edit, contentDescription = "Tasks")
+            Icon(
+                imageVector = Icons.Filled.DateRange,
+                contentDescription = "Calendar",
+                modifier = Modifier.size(32.dp)
+            )
+            Icon(
+                imageVector = Icons.Filled.Edit,
+                contentDescription = "Tasks",
+                modifier = Modifier.size(32.dp)
+            )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewPlansScreen() {
+    PlansScreen(onAddPlanClick = {})
 }
