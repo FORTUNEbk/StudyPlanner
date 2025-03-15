@@ -52,18 +52,18 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.navigation.runtime.ktx)
 
-    // ✅ Corrected Compose Material Icons Extended dependency
+    // ✅ Coil dependency added for image loading
+    implementation("io.coil-kt:coil-compose:2.4.0") // Use the latest version
+
+
     implementation("androidx.compose.material:material-icons-extended:1.5.0")
-
-    // ✅ Added missing AndroidX DataStore dependency
     implementation("androidx.datastore:datastore-preferences:1.0.0")
-
-    // ✅ Added missing Kotlin Coroutines dependencies (needed for DataStore)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.storage)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

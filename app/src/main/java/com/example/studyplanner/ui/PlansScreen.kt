@@ -1,94 +1,56 @@
 package com.example.studyplanner.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun PlansScreen(onAddPlanClick: () -> Unit) {
+fun PlansScreen(navController: NavHostController, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .background(Color(0xFFF5F5F5)) // Light gray background
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Top
     ) {
-        // Header Section
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+        Text(
+            text = "My Study Plans",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        Button(
+            onClick = { navController.navigate("add_plan") },
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Text(
-                text = "Plans",
-                fontSize = 24.sp
-            )
-            Text(
-                text = "+",
-                fontSize = 28.sp,
-                modifier = Modifier
-                    .clickable { onAddPlanClick() }
-                    .padding(8.dp) // Added padding for better tap target
-            )
+            Text(text = "Add New Plan")
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(16.dp))
 
-        // Empty State Message
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Button(
+            onClick = { navController.navigate("home") },
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Text(
-                text = "You don’t have registered study plans",
-                fontSize = 14.sp,
-                color = Color.Gray,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = "Click on + to add",
-                fontSize = 14.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        // Bottom Icons
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            Icon(
-                imageVector = Icons.Filled.DateRange,
-                contentDescription = "Calendar",
-                modifier = Modifier.size(32.dp)
-            )
-            Icon(
-                imageVector = Icons.Filled.Edit,
-                contentDescription = "Tasks",
-                modifier = Modifier.size(32.dp)
-            )
+            Text(text = "Back to Home")
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewPlansScreen() {
-    PlansScreen(onAddPlanClick = {})
+fun PlansScreenPreview() {
+    PlansScreen(navController = rememberNavController()) // Uses a placeholder navController
 }

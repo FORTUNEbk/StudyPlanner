@@ -14,11 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
@@ -42,9 +41,15 @@ fun SettingsScreen(navController: NavHostController, modifier: Modifier = Modifi
         )
 
         // Settings Options
-        SettingsButton(text = "Edit Profile", icon = Icons.Default.AccountCircle) {}
-        SettingsButton(text = "Enable Notifications", icon = Icons.Default.Notifications) {}
-        SettingsButton(text = "Choose Theme", icon = Icons.Default.Brightness6) {}
+        SettingsButton(text = "Edit Profile", icon = Icons.Default.AccountCircle) {
+            navController.navigate("edit_profile")
+        }
+        SettingsButton(text = "Enable Notifications", icon = Icons.Default.Notifications) {
+            navController.navigate("notification_settings")
+        }
+        SettingsButton(text = "Choose Theme", icon = Icons.Default.Brightness6) {
+            navController.navigate("theme_selection")
+        }
 
         Spacer(modifier = Modifier.weight(1f)) // Pushes logout button to bottom
 
@@ -89,3 +94,4 @@ fun LogoutButton(onClick: () -> Unit) {
 fun SettingsScreenPreview() {
     SettingsScreen(navController = rememberNavController()) // Uses a placeholder navController
 }
+

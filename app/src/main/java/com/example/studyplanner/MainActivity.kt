@@ -21,8 +21,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import com.example.studyplanner.ui.PlansScreen
 import com.example.studyplanner.ui.SettingsScreen
-
-import  kotlinx.coroutines.flow.first
+import com.example.studyplanner.ui.EditProfileScreen // Import EditProfileScreen
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -72,6 +72,7 @@ fun NavigationGraph(navController: NavHostController, startDestination: String, 
         composable("signup") { SignupScreen(navController) }
         composable("plans") { PlansScreen { navController.navigate("add_plan") } }
         composable("settings") { SettingsScreen(navController) }
+        composable("edit_profile") { EditProfileScreen(navController) } // Add EditProfileScreen
     }
 }
 
